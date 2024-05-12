@@ -1,12 +1,6 @@
-.lock-icons {
-    display: flex;
+.container {
     justify-content: center;
-    margin: 20px 0;
-}
-
-.lock-icon {
-    margin: 0 15px;
-    font-size: 24px;
+    align-items: center;
 }
 
 button {

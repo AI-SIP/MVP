@@ -8,54 +8,29 @@
   overflow: hidden;
 }
 
-.lock-icons {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.lock-icon {
-  margin: 0 15px;
-  font-size: 24px;
-}
-
-button {
-  background-color: green;
-  color: white;
-  border: none;
-  margin-top: 15px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: darkgreen;
-}
-
-.fade-enter,
-.fade-exit-done {
+.fade-enter {
   opacity: 0;
-  /*화면 깜빡임 방지*/
+  transform: scale(0.8);
   position: absolute;
   width: 100%;
 }
 
 .fade-enter-active {
   opacity: 1;
+  transform: scale(1);
   position: absolute;
-  /*transition: opacity 600ms ease-in-out 300ms;*/
+  transform: opacity 1200ms ease-in-out, transform 1200ms ease-in-out;
 }
 
 .fade-exit {
   opacity: 1;
-  /*position: absolute;*/
-  transition: opacity 600ms ease-in-out;
-  ;
+  position: absolute;
+  transition: opacity 300ms ease-in-out;
 }
 
 .fade-exit-active {
   opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
   position: absolute;
-  /*transition: opacity 600ms ease-in-out 300ms;*/
 }

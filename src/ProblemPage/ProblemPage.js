@@ -12,7 +12,7 @@ function ProblemPage({ imageUrl, problemId, onNext }) {
   };
 
   const handleSubmit = () => {
-    fetch(`/problems/feedback/${problemId}`, {
+    fetch(`/problem/${problemId}/feedback`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

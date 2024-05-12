@@ -12,28 +12,29 @@ import { CSSTransition } from "react-transition-group";
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState("startPage"); // 초기 상태를 startPage로 설정
+  //const [transitionInProgess, setTransitionInProgress] = useState(false);
   const [images, setImages] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
   const [feedback, setFeedback] = useState("이 문제에 대한 피드백입니다...");
 
   const handleToStartPage = () => {
-    setCurrentScreen("startPage");
+    changeScreenWithDelay("startPage");
   };
 
   const handleToIntroductionFirstPage = () => {
-    setCurrentScreen("introduction1");
+    changeScreenWithDelay("introduction1");
   };
 
   const handleToIntroductionSecondPage = () => {
-    setCurrentScreen("introduction2");
+    changeScreenWithDelay("introduction2");
   };
 
   const handleToUserFormPage = () => {
-    setCurrentScreen("userForm");
+    changeScreenWithDelay("userForm");
   };
 
   const handleToSubjectSelectPage = () => {
-    setCurrentScreen("subjectSelection"); // UserForm에서 제출 버튼 클릭 시 화면 전환
+    changeScreenWithDelay("subjectSelection"); // UserForm에서 제출 버튼 클릭 시 화면 전환
   };
 
   const handleSubjectSelect = (subject) => {
@@ -42,7 +43,7 @@ function App() {
       .then((data) => {
         console.log(data); // 서버 응답 로그 출력
         setImages(data.map((item) => item.imageUrl)); // 이미지 URL만 추출하여 상태에 저장
-        setCurrentScreen("problemPage");
+        changeScreenWithDelay("problemPage");
       })
       .catch((error) => {
         console.error("Error fetching images: ", error);
@@ -52,7 +53,7 @@ function App() {
           "/images/problem3.png",
         ];
         setImages(tempImages);
-        setCurrentScreen("problemPage");
+        changeScreenWithDelay("problemPage");
       });
   };
 
@@ -60,7 +61,7 @@ function App() {
     const nextIndex = imageIndex + 1;
     if (nextIndex < images.length) {
       setImageIndex(nextIndex);
-      setCurrentScreen("problemPage");
+      changeScreenWithDelay("problemPage");
     } else {
       console.log("No more problems");
       handleToAnalysis();
@@ -69,11 +70,18 @@ function App() {
 
   const handleFeedback = (feedbackFromServer) => {
     setFeedback(feedbackFromServer);
-    setCurrentScreen("feedbackPage");
+    changeScreenWithDelay("feedbackPage");
   };
 
   const handleToAnalysis = () => {
-    setCurrentScreen("analysisPage"); // 분석 페이지로 전환
+    changeScreenWithDelay("analysisPage"); // 분석 페이지로 전환
+  };
+
+  const changeScreenWithDelay = (newScreen) => {
+    setCurrentScreen(null);
+    setTimeout(() => {
+      setCurrentScreen(newScreen);
+    }, 500);
   };
 
   return (

@@ -11,12 +11,31 @@
     margin: auto;
 }
 
+.form-field {
+    display: flex;
+    flex-direction: column;
+    /* 입력 필드와 레이블을 세로로 정렬 */
+    align-items: flex-start;
+    /* 왼쪽 정렬 */
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.form-field label {
+    font-weight: bold;
+    /* 글씨를 진하게 */
+    color: #333;
+    /* 글씨 색상을 조금 더 진하게 */
+    margin-bottom: 4px;
+    /* 레이블과 입력 필드 사이의 간격 */
+}
+
 .form-input {
     width: 100%;
     /* 입력 필드의 너비 */
     padding: 10px;
     /* 입력 필드 내부 패딩 */
-    margin: 5px 0;
+    margin: 10px 0;
     /* 상하 마진 */
 }
 

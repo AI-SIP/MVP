@@ -3,11 +3,11 @@ import "./StartPage.css";
 
 function StartPage({ onConfirm }) {
   return (
-    <>
+    <div className="container">
       <Header />
       <Message />
       <ConfirmButton onConfirm={onConfirm} />
-    </>
+    </div>
   );
 }
 
