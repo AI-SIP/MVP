@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function AnalysisPage() {
+function AnalysisPage({ onSubmit }) {
   const [analysisResult, setAnalysisResult] = useState("");
 
   useEffect(() => {
@@ -18,6 +18,7 @@ function AnalysisPage() {
     <div className="analysis-container">
       <h1>최종 분석 결과</h1>
       <p>{analysisResult}</p>
+      <button onClick={onSubmit}>마침</button>
     </div>
   );
 }

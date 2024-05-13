@@ -15,12 +15,26 @@ function UserForm({ onBack, onSubmit }) {
 
   const handleSubmit = () => {
     const userInfo = {
-      name,
-      school,
+      name: name,
+      school: school,
     };
 
-    // fetch 코드 생략
-    console.log(userInfo); // 콘솔에 유저 정보 출력
+    fetch("/userInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        onSubmit();
+      })
+      .catch((error) => {
+        console.log(userInfo); // 콘솔에 유저 정보 출력
+        onSubmit();
+      });
   };
 
   return (
@@ -56,7 +70,7 @@ function UserForm({ onBack, onSubmit }) {
         <button className="back-button" onClick={onBack}>
           뒤로 가기
         </button>
-        <button className="submit-button" onClick={onSubmit}>
+        <button className="submit-button" onClick={handleSubmit}>
           제출
         </button>
       </div>

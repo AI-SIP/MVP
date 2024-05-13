@@ -21,11 +21,16 @@ function ProblemPage({ imageUrl, problemId, onNext }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        onNext(data.feedback); // `onNext`는 피드백을 처리하기 위한 부모 컴포넌트의 함수
+        onNext(data); // `onNext`는 피드백을 처리하기 위한 부모 컴포넌트의 함수
       })
       .catch((error) => {
         console.error("Error posting selections:", error);
-        onNext("피드백.");
+        let tempFeedback = {
+          score: 100,
+          percentage: 50,
+          rating: 3,
+        };
+        onNext(tempFeedback);
       })
       .finally(() => {
         console.log(selections);

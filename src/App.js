@@ -5,14 +5,15 @@ import IntroductionFirst from "./Introduction/IntroductionFirst";
 import IntroductionSecond from "./Introduction/IntroductionSecond";
 import UserForm from "./UserForm/UserForm";
 import SubjectSelection from "./SubjectSelection/SubjectSelection";
+import ProblemSetStartPage from "./ProblemSetStartPage/ProblemSetStartPage";
 import ProblemPage from "./ProblemPage/ProblemPage";
 import FeedbackPage from "./FeedbackPage/FeedbackPage";
 import AnalysisPage from "./Analysis/AnalysisPage";
 import { CSSTransition } from "react-transition-group";
 
 function App() {
+  const problemSetSize = 3;
   const [currentScreen, setCurrentScreen] = useState("startPage"); // 초기 상태를 startPage로 설정
-  //const [transitionInProgess, setTransitionInProgress] = useState(false);
   const [images, setImages] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
   const [feedback, setFeedback] = useState("이 문제에 대한 피드백입니다...");
@@ -43,7 +44,7 @@ function App() {
       .then((data) => {
         console.log(data); // 서버 응답 로그 출력
         setImages(data.map((item) => item.imageUrl)); // 이미지 URL만 추출하여 상태에 저장
-        changeScreenWithDelay("problemPage");
+        changeScreenWithDelay("problemSetStartPage");
       })
       .catch((error) => {
         console.error("Error fetching images: ", error);
@@ -51,21 +52,35 @@ function App() {
           "/images/problem1.png",
           "/images/problem2.png",
           "/images/problem3.png",
+          "/images/problem4.png",
+          "/images/problem5.png",
+          "/images/problem6.png",
+          "/images/problem7.png",
+          "/images/problem8.png",
+          "/images/problem9.png",
         ];
         setImages(tempImages);
-        changeScreenWithDelay("problemPage");
+        changeScreenWithDelay("problemSetStartPage");
       });
   };
 
   const handleNextProblem = () => {
     const nextIndex = imageIndex + 1;
+    setImageIndex(nextIndex);
     if (nextIndex < images.length) {
-      setImageIndex(nextIndex);
-      changeScreenWithDelay("problemPage");
+      if (nextIndex % problemSetSize === 0) {
+        changeScreenWithDelay("problemSetStartPage");
+      } else {
+        changeScreenWithDelay("problemPage");
+      }
     } else {
       console.log("No more problems");
       handleToAnalysis();
     }
+  };
+
+  const handleToProblem = () => {
+    changeScreenWithDelay("problemPage");
   };
 
   const handleFeedback = (feedbackFromServer) => {
@@ -147,6 +162,18 @@ function App() {
       </CSSTransition>
 
       <CSSTransition
+        in={currentScreen === "problemSetStartPage"}
+        timeout={100}
+        classNames="fade"
+        unmountOnExit
+      >
+        <ProblemSetStartPage
+          problemSetNumber={Math.floor(imageIndex / problemSetSize) + 1}
+          onNextProblem={handleToProblem}
+        />
+      </CSSTransition>
+
+      <CSSTransition
         in={currentScreen === "problemPage"}
         timeout={100}
         classNames="fade"
@@ -178,7 +205,7 @@ function App() {
         classNames="fade"
         unmountOnExit
       >
-        <AnalysisPage />
+        <AnalysisPage onSubmit={handleToStartPage} />
       </CSSTransition>
     </div>
   );
