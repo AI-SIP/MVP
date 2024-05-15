@@ -1,0 +1,96 @@
+.user-form {
+    display: flex;
+    /* 요소들을 수직 방향으로 정렬 */
+    flex-direction: column;
+    /* 가운데 정렬 */
+    align-items: center;
+    /* 요소 사이 간격 */
+    gap: 10px;
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    /* 입력 필드와 레이블을 세로로 정렬 */
+    align-items: flex-start;
+    /* 왼쪽 정렬 */
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.form-field label {
+    font-weight: bold;
+    /* 글씨를 진하게 */
+    color: #333;
+    /* 글씨 색상을 조금 더 진하게 */
+    margin-bottom: 4px;
+    /* 레이블과 입력 필드 사이의 간격 */
+}
+
+.form-input {
+    width: 100%;
+    /* 입력 필드의 너비 조정 */
+    padding: 12px;
+    /* 패딩을 조금 더 늘려서 입력 경험 개선 */
+    margin: 10px 0;
+    /* 상하 마진 조정 */
+    font-size: 15px;
+    /* 글씨 크기를 18px로 늘림 */
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    /* 폰트 스타일 설정 */
+    color: #333;
+    /* 글씨 색상 설정 */
+    border-radius: 4px;
+    /* 입력 필드의 테두리 둥글게 설정 */
+    border: 1px solid #ccc;
+    /* 테두리 색상 및 스타일 설정 */
+}
+
+.form-buttons {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.back-button {
+    flex: 1;
+    width: 100%;
+    background-color: #ccc;
+    /* 검정색 텍스트 */
+    color: black;
+    /* 테두리 제거 */
+    border: none;
+    /* 내부 패딩 */
+    padding: 10px;
+    cursor: pointer;
+}
+
+.submit-button {
+    flex: 1;
+    /* 버튼 너비 */
+    width: 100%;
+    /* 버튼 내부 패딩 */
+    padding: 10px;
+    /* 버튼 배경 색상 */
+    background-color: #4CAF50;
+    /* 버튼 텍스트 색상 */
+    color: white;
+    /* 테두리 제거 */
+    border: none;
+    /* 마우스 오버 시 커서 변경 */
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+    /* 호버 시 버튼 배경 색상 변경 */
+}
+
+.back-button:hover {
+    background-color: #a9a9a9;
+    /* 호버 시 버튼 배경 색상 변경 */
+}
