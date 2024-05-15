@@ -8,13 +8,13 @@ function SubjectSelection({ onSelect, onBack }) {
       <div className="subject-buttons">
         <button
           className="subject-button"
-          onClick={() => onSelect("earthScience")}
+          onClick={() => onSelect("earth_science")}
         >
           지구 과학
         </button>
         <button
           className="subject-button"
-          onClick={() => onSelect("lifeScience")}
+          onClick={() => onSelect("life_science")}
         >
           생명 과학
         </button>

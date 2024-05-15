@@ -10,6 +10,7 @@ import ProblemPage from "./ProblemPage/ProblemPage";
 import FeedbackPage from "./FeedbackPage/FeedbackPage";
 import AnalysisPage from "./Analysis/AnalysisPage";
 import { CSSTransition } from "react-transition-group";
+import config from "./config";
 
 function App() {
   const problemSetSize = 3;
@@ -17,8 +18,10 @@ function App() {
   const [images, setImages] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
   const [feedback, setFeedback] = useState("이 문제에 대한 피드백입니다...");
+  const [subject, setSubject] = useState("");
 
   const handleToStartPage = () => {
+    setImageIndex(0);
     changeScreenWithDelay("startPage");
   };
 
@@ -39,11 +42,14 @@ function App() {
   };
 
   const handleSubjectSelect = (subject) => {
-    fetch(`/problems/${subject}`)
+    setSubject(subject);
+    fetch(`${config.API_BASE_URL}/problems/${subject}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data); // 서버 응답 로그 출력
-        setImages(data.map((item) => item.imageUrl)); // 이미지 URL만 추출하여 상태에 저장
+        // 모든 키의 값(이미지 URL 배열)을 하나의 배열로 합치기
+        const allImages = Object.values(data).flat();
+        console.log(allImages);
+        setImages(allImages); // 추출된 모든 이미지 URL을 상태에 저장
         changeScreenWithDelay("problemSetStartPage");
       })
       .catch((error) => {
@@ -183,6 +189,8 @@ function App() {
           imageUrl={images[imageIndex]}
           problemId={imageIndex + 1}
           onNext={handleFeedback}
+          subject={subject}
+          userId={sessionStorage.getItem("userId")}
         />
       </CSSTransition>
 

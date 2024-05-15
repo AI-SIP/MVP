@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import "./UserForm.css";
+import config from "../config.js";
+import { v4 as uuidv4 } from "uuid";
 
 function UserForm({ onBack, onSubmit }) {
   const [name, setName] = useState("");
   const [school, setSchool] = useState("");
+  const [userId] = useState(() => uuidv4()); // 렌더링 시 한 번만 UUID 생성
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -15,11 +18,14 @@ function UserForm({ onBack, onSubmit }) {
 
   const handleSubmit = () => {
     const userInfo = {
+      userId: userId,
       name: name,
       school: school,
     };
+    console.log(userInfo);
+    sessionStorage.setItem("userId", userId);
 
-    fetch("/userInfo", {
+    fetch(`${config.API_BASE_URL}/userInfo`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +34,7 @@ function UserForm({ onBack, onSubmit }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        console.log("post Success");
         onSubmit();
       })
       .catch((error) => {

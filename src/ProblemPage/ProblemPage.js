@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./ProblemPage.css";
+import config from "../config";
 
-function ProblemPage({ imageUrl, problemId, onNext }) {
+function ProblemPage({ imageUrl, problemId, onNext, subject, userId }) {
   const options = ["ㄱ", "ㄴ", "ㄷ"];
   const [selections, setSelections] = useState([false, false, false]);
 
@@ -12,15 +13,21 @@ function ProblemPage({ imageUrl, problemId, onNext }) {
   };
 
   const handleSubmit = () => {
-    fetch(`/problem/${problemId}/feedback`, {
+    const realProblemId =
+      subject === "earth_science" ? problemId + 10 : problemId;
+    console.log("realProblemId : ", realProblemId);
+    console.log("userId: ", userId);
+    //console.log("subject :", subject === "earth_science");
+    fetch(`${config.API_BASE_URL}/problems/${realProblemId}/feedback`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ selections }),
+      body: JSON.stringify({ selections, userId }),
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log("problem feedback : ", data);
         onNext(data); // `onNext`는 피드백을 처리하기 위한 부모 컴포넌트의 함수
       })
       .catch((error) => {

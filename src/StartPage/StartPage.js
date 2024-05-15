@@ -16,7 +16,7 @@ function Header() {
 }
 
 function Message() {
-  return <p>안녕하세용</p>;
+  return <h3>경쟁형 메타인지 과학 학습 플랫폼 - 과탑</h3>;
 }
 
 function ConfirmButton({ onConfirm }) {
