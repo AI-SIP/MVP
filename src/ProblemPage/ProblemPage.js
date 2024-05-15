@@ -52,11 +52,12 @@ function ProblemPage({ imageUrl, problemId, onNext, subject, userId }) {
         {selections.map((selected, index) => (
           <div key={index}>
             <input
+              id={`option-${index}`}
               type="checkbox"
               checked={selected}
               onChange={() => handleCheckboxChange(index)}
             />
-            <label>{`${options[index]}`}</label>
+            <label htmlFor={`option-${index}`}>{options[index]}</label>
           </div>
         ))}
       </div>
