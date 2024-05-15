@@ -9,6 +9,8 @@ import ProblemSetStartPage from "./ProblemSetStartPage/ProblemSetStartPage";
 import ProblemPage from "./ProblemPage/ProblemPage";
 import FeedbackPage from "./FeedbackPage/FeedbackPage";
 import AnalysisPage from "./Analysis/AnalysisPage";
+import ReviewPage from "./ReviewPage/ReviewPage";
+import LastPage from "./LastPage/LastPage";
 import { CSSTransition } from "react-transition-group";
 import config from "./config";
 
@@ -96,6 +98,14 @@ function App() {
 
   const handleToAnalysis = () => {
     changeScreenWithDelay("analysisPage"); // 분석 페이지로 전환
+  };
+
+  const handleToReviewPage = () => {
+    changeScreenWithDelay("reviewPage");
+  };
+
+  const handleToLastPage = () => {
+    changeScreenWithDelay("lastPage");
   };
 
   const changeScreenWithDelay = (newScreen) => {
@@ -213,7 +223,28 @@ function App() {
         classNames="fade"
         unmountOnExit
       >
-        <AnalysisPage onSubmit={handleToStartPage} />
+        <AnalysisPage onSubmit={handleToReviewPage} />
+      </CSSTransition>
+
+      <CSSTransition
+        in={currentScreen === "reviewPage"}
+        timeout={100}
+        classNames="fade"
+        unmountOnExit
+      >
+        <ReviewPage
+          userId={sessionStorage.getItem("userId")}
+          onSubmit={handleToLastPage}
+        />
+      </CSSTransition>
+
+      <CSSTransition
+        in={currentScreen === "lastPage"}
+        timeout={100}
+        classNames="fade"
+        unmountOnExit
+      >
+        <LastPage onSubmit={handleToStartPage} />
       </CSSTransition>
     </div>
   );
