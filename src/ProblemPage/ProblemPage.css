@@ -27,6 +27,24 @@
 
 .options-container div {
     margin: 0 20px;
+    display: flex;
+    align-items: center;
+}
+
+.options-container div input[type="checkbox"] {
+    width: 24px;
+    /* 체크박스 크기 조정 */
+    height: 24px;
+    /* 체크박스 크기 조정 */
+    cursor: pointer;
+}
+
+.options-container div label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    /* 라벨 글씨 크기 증가 */
+    margin-left: 1px;
+    /* 라벨과 체크박스 사이 간격 조정 */
 }
 
 .problem-button {
