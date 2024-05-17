@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FeedbackPage.css";
+import { FaCheckCircle, FaLock } from "react-icons/fa";
 
 function FeedbackPage({ feedback, index, onNextProblem }) {
+  const [showIcons, setShowIcons] = useState(true);
+
   const renderScoreDiff = () => {
     if (feedback.score_diff > 0) {
       return <span style={{ color: "red" }}>+{feedback.score_diff}</span>;
@@ -24,9 +27,42 @@ function FeedbackPage({ feedback, index, onNextProblem }) {
     }
   };
 
+  const renderIcon = (index) => {
+    if (!showIcons) return null;
+
+    const problemNumberNow = index % 3 === 0 ? 3 : index % 3;
+    const icons = [];
+
+    for (let i = 0; i < problemNumberNow; i++) {
+      icons.push(
+        <div className="icon-item">
+          <FaCheckCircle
+            style={{ color: "green", fontSize: "24px", margin: "5px" }}
+          />
+        </div>
+      );
+    }
+
+    for (let i = problemNumberNow; i < 3; i++) {
+      icons.push(
+        <div className="icon-item">
+          <FaLock style={{ color: "blue", fontSize: "24px", margin: "5px" }} />
+        </div>
+      );
+    }
+
+    return <div className="icon-container">{icons}</div>;
+  };
+
+  const handleNextClick = () => {
+    setShowIcons(false);
+    setTimeout(onNextProblem, 100);
+  };
+
   return (
     <div className="feedback-container">
       <h1>{feedback.feedback}</h1>
+      {renderIcon(index)}
       <h3>
         현재 점수 : {feedback.score} ({renderScoreDiff()})
       </h3>
@@ -35,7 +71,7 @@ function FeedbackPage({ feedback, index, onNextProblem }) {
         {feedback.percentage}%의 유저보다 우수한 성적입니다! (
         {renderPercentageDiff()})
       </h3>
-      <button onClick={onNextProblem}>다음 문제로</button>
+      <button onClick={handleNextClick}>다음 문제로</button>
     </div>
   );
 }

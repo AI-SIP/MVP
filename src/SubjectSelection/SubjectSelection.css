@@ -16,16 +16,22 @@
     border: none;
     /* 클릭 가능한 요소 표시 */
     cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.subject-button.loaded {
+    opacity: 1;
 }
 
 .subject-buttons {
     display: flex;
-    /* 버튼들 사이에 공간을 동일하게 배분 */
     justify-content: space-between;
-    /* 전체 너비 사용 */
     width: 90%;
-    /* 아랫 줄과의 간격 조정 */
+    margin: auto;
 }
+
+
 
 .back-button {
     width: 40%;

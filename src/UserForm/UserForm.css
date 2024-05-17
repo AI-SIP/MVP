@@ -5,10 +5,12 @@
     /* 가운데 정렬 */
     align-items: center;
     /* 요소 사이 간격 */
-    gap: 10px;
+    justify-content: center;
     width: 90%;
     max-width: 600px;
+    padding: 0 20px;
     margin: auto;
+    box-sizing: border-box;
 }
 
 .form-field {
@@ -31,7 +33,7 @@
 }
 
 .form-input {
-    width: 100%;
+    width: calc(100% - 24px);
     /* 입력 필드의 너비 조정 */
     padding: 12px;
     /* 패딩을 조금 더 늘려서 입력 경험 개선 */
@@ -53,7 +55,6 @@
 .form-buttons {
     display: flex;
     width: 100%;
-    gap: 10px;
 }
 
 .back-button {
