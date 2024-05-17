@@ -14,6 +14,45 @@
     font-size: 18px;
 }
 
+.feedback-container h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-container h1 svg {
+    /* 타이틀과 아이콘 사이의 간격 */
+    margin-right: 10px;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-container>.icon-item {
+    position: relative;
+    margin: 0 30px;
+    z-index: 2;
+}
+
+.icon-item:not(:last-child):after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -80px;
+    /* 오른쪽 아이콘으로부터 거리 */
+    width: 95px;
+    /* 선의 길이 */
+    height: 3px;
+    /* 선의 두께 */
+    background-color: #ccc;
+    /* 선의 색상 */
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
 button {
     padding: 10px 20px;
     margin-top: 20px;
